@@ -19,5 +19,5 @@ URL -
 * AWS Lambda, API Gateway, DynamodDB
 
 ## Authors
-* Mrs. Goldstone
-* Mrs. Rom
+* Mrs. M Goldstone
+* Mrs. E Rom
