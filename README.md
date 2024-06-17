@@ -2,7 +2,7 @@
 A Website for Saving Shopping lists
 
 ## Features
-Do all CRUD requests
+Do all CRUD requests as per client specifications
 
 Ex: Create lists, Read lists, Update lists, and Delete lists
 
