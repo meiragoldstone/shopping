@@ -1,0 +1,16 @@
+.layout {
+    align-items: center;
+    justify-content: center;
+}
+
+ul {
+    display: flex;
+    padding: 10px;
+    width: 100%;
+    background-color: aqua;
+}
+
+li {
+    padding-left: 10px;
+    list-style-type: none;
+}
