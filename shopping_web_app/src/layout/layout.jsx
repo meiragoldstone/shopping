@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom"
-import "./layout.css";
 import { Navbar, Nav, Container } from 'react-bootstrap';
 
 export function Layout() {

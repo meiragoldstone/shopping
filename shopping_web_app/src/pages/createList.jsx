@@ -4,12 +4,14 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Alert from 'react-bootstrap/Alert';
 import { useState } from "react";
 
 export function CreateList() {
     const [listKey, setListKey] = useState("");
     const [list, setList] = useState([]);
     const [newItem, setNewItem] = useState("");
+    const [responseMessage, setResponseMessage] = useState({variant: '', message: ''});
 
     function updateList() {
         setList(list.concat(newItem));
@@ -18,7 +20,30 @@ export function CreateList() {
     }
 
     function createList() {
-        console.log('----- Create this List', list)
+        setResponseMessage({});
+        const params = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                listId: listKey,
+                list: list,
+            })
+        }
+        fetch('https://bdgjktps12.execute-api.us-east-1.amazonaws.com/default/createShoppingList', params)
+            .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(_ => {
+            setResponseMessage({variant: 'success', message: `${listKey} was created successfully`});
+          })
+          .catch(_ => {
+            setResponseMessage({variant: 'danger', message:`Error in creating ${listKey}`});
+          });
     }
 
     return (
@@ -66,6 +91,11 @@ export function CreateList() {
                         <Button variant="secondary" onClick={createList}>Create List</Button>
                     </Card.Body>
                     </Card>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Alert variant={responseMessage.variant}>{responseMessage.message}</Alert>
                     </Col>
                 </Row>
             </Container>
