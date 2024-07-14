@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Col } from "react-bootstrap";
@@ -10,15 +10,16 @@ export function GetList() {
     const [listKey, setListKey] = useState('');
     const [listData, setListData] = useState([]);
 
-    const list = listData?.map(item => {
-        return <Card className="m-2 p-2" key={item.key}>{item.value}</Card>
+    const list = listData?.map((item, index) => {
+        return <Badge className="m-2 p-2" bg="secondary" key={index}>{item}</Badge>
     });
 
-
     function getListByKey() {
-        console.log(listKey);
-        const list = [{ key: 1, value: 'grapes' }, { key: 2, value: 'bowls' }, { key: 3, value: 'onions' }];
-        setListData(list);
+        fetch(`https://bdgjktps12.execute-api.us-east-1.amazonaws.com/default/getShoppingList?listId=${listKey}`)
+            .then(response => response.json())
+            .then(data => {
+                setListData(data.list)
+            });
     }
 
     return <>
