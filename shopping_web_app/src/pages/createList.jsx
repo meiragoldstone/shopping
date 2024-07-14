@@ -7,70 +7,71 @@ import Card from 'react-bootstrap/Card';
 import { useState } from "react";
 
 export function CreateList() {
+    const [listKey, setListKey] = useState("");
+    const [list, setList] = useState([]);
+    const [newItem, setNewItem] = useState("");
 
-    const [listKey, setListKey] = useState('');
-    const [listData, setListData] = useState([]);
-    const [inputValue, setInputValue] = useState('');
-
-
-    function addItemToList() {
-        // setListData([...listData, inputValue]);
-        setListData(listData.concat(inputValue));
-        setInputValue('')
+    function updateList() {
+        setList(list.concat(newItem));
+        setNewItem('')
+        console.log('-----------Update the list with this item', newItem)
     }
-    // Function to render list items
-    const renderItems = () => {
-        return <>
-            <Card.Body>
-                <Card.Title>{listKey}</Card.Title>
-                {listData.map((item, index) => (
-                    <Card.Text key={index}>{item}</Card.Text>
-                ))}
-            </Card.Body>
-        </>
-    };
 
-    return <div>
-        <Container className="justify-content-md-center mt-5" fluid="md">
-            <Row >
-                <Col><h1>This is my Create Shopping List Page</h1></Col>
-            </Row>
-            <Row >
-                <Col>
-                    <Form.Label>List Name</Form.Label>
-                    <Form.Control variant='primary' type="text" placeholder="List Key" onChange={(e) => setListKey(e.target.value)} />
-                </Col>
-            </Row>
+    function createList() {
+        console.log('----- Create this List', list)
+    }
 
-            <Row className="mt-2">
-                <Col>
-                    <Form.Label>List Objects</Form.Label>
-                    <Form.Control type="text" placeholder="Enter text here" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-                </Col>
-            </Row>
-            <Row className='mt-2'>
-                <Col>
-                    <Button variant="outline-secondary" onClick={addItemToList}>Add Item</Button>
-                </Col>
-            </Row>
-            <Row className='mt-5'>
-                <Col>
-                    <h3>Results</h3>
-                </Col>
-            </Row>
-            <Row className='mt-2'>
-                <Col>
-                    <Card className="mt-3">
-                        {renderItems()}
+    return (
+        <>
+            <Container>
+                <Row className="mt-2">
+                    <Col>
+                        <h1>This is my Create List Page</h1>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Form.Label>List Key</Form.Label>
+                    </Col>
+                </Row>
+                <Row className="mt-2">
+                    <Col>
+                        <Form.Control variant='primary' type="text" placeholder="List Key" onChange={event => setListKey(event.target.value)}/>
+                    </Col>
+                </Row>
+                <Row className="mt-5">
+                    <Col>
+                        <Form.Label>List Item</Form.Label>
+                    </Col>
+                </Row>
+                <Row className="mt-2">
+                    <Col>
+                        <Form.Control variant='primary' type="text" placeholder="Add List Item" value={newItem} onChange={event => setNewItem(event.target.value)}/>
+                    </Col>
+                </Row>
+                <Row className="mt-3">
+                    <Col>
+                        <Button variant="secondary" onClick={updateList} >Add item to Shopping list</Button>
+                    </Col>
+                </Row>
+                <Row className="mt-3">
+                    <Col>
+                    <Card>
+
+                    <Card.Body>
+                        <Card.Title>{listKey}</Card.Title>
+                        {list.map((l, index) => {
+                            return <Card.Text key={index}>{l}</Card.Text>
+                        })}
+                        <Button variant="secondary" onClick={createList}>Create List</Button>
+                    </Card.Body>
                     </Card>
-                </Col>
-            </Row>
-            <Row className='mt-5'>
-                <Col>
-                    <Button variant="outline-secondary">Create List</Button>{' '}
-                </Col>
-            </Row>
-        </Container>
+                    </Col>
+                </Row>
+            </Container>
+        </>
+    )
 
-    </div>;
 }
+
+

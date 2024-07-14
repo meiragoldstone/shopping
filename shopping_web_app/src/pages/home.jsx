@@ -1,5 +1,9 @@
+import Button from 'react-bootstrap/Button';
+
 export function Home() {
     return (
-        <button>This is my Home button</button>
+        <>
+        <Button className='m-5 p-3' variant="outline-secondary">This is my home button</Button>
+        </>
     );
 }
