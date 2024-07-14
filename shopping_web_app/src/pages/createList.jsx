@@ -23,9 +23,6 @@ export function CreateList() {
         setResponseMessage({});
         const params = {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
             body: JSON.stringify({
                 listId: listKey,
                 list: list,
@@ -93,7 +90,7 @@ export function CreateList() {
                     </Card>
                     </Col>
                 </Row>
-                <Row>
+                <Row className="mt-5">
                     <Col>
                         <Alert variant={responseMessage.variant}>{responseMessage.message}</Alert>
                     </Col>
